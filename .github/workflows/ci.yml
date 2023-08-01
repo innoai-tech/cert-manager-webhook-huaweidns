@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - "main"
+    tags:
+      - 'v*'
+    paths:
+      - .github/workflows/ci.yml
+      - cmd/**
+      - cuepkg/**
+      - cuedevpkg/**
+      - wagon.cue
+      - Makefile
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      DAGGER_LOG_FORMAT: plain
+      GH_USERNAME: ${{ github.actor }}
+      GH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: docker/setup-qemu-action@v2
+      - run: curl -sSLf https://raw.githubusercontent.com/octohelm/wagon/main/install.sh | sudo sh
+
+      - run: make ship
+      - run: make manifests
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: true
+          automatic_release_tag: "latest"
+          files: |
+            .tmp/manifests/*.yaml
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          files: |
+            .tmp/manifests/*.yaml
