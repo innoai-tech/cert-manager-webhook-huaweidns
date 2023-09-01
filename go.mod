@@ -3,7 +3,7 @@ module github.com/innoai-tech/cert-manager-webhook-huaweidns
 go 1.20
 
 require (
-	github.com/cert-manager/cert-manager v1.12.3
+	github.com/cert-manager/cert-manager v1.12.4
 	github.com/huaweicloud/huaweicloud-sdk-go-v3 v0.1.51
 	github.com/octohelm/x v0.0.0-20220811034253-019992077a5d
 	k8s.io/apiextensions-apiserver v0.27.4
