@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/cert-manager/cert-manager v1.12.3
-	github.com/huaweicloud/huaweicloud-sdk-go-v3 v0.1.51
+	github.com/huaweicloud/huaweicloud-sdk-go-v3 v0.1.63
 	github.com/octohelm/x v0.0.0-20220811034253-019992077a5d
 	k8s.io/apiextensions-apiserver v0.27.4
 	k8s.io/client-go v0.27.4
@@ -59,6 +59,7 @@ require (
 	github.com/spf13/cobra v1.7.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stoewer/go-strcase v1.2.0 // indirect
+	github.com/tjfoc/gmsm v1.4.1 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.7 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.7 // indirect
 	go.etcd.io/etcd/client/v3 v3.5.7 // indirect
